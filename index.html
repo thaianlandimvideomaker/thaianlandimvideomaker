@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thaian Landim — Videomaker & Editor de Vídeo</title>
+<meta name="description" content="Thaian Landim, videomaker e editor de vídeo. Produção de VSLs, criativos, reels, institucionais e vídeos de YouTube para marcas, criadores e infoprodutores.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d0e;
+    --bg-raised:#14181a;
+    --bg-raised-2:#191f21;
+    --border:#232b2d;
+    --border-soft:#1c2224;
+    --text:#edefee;
+    --text-dim:#97a3a1;
+    --text-faint:#5e6b69;
+    --accent:#3fe3c8;
+    --accent-soft:rgba(63,227,200,.13);
+    --accent-line:rgba(63,227,200,.35);
+    --radius-s:3px;
+    --radius-m:6px;
+    --maxw:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Source Sans 3', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Outfit', sans-serif;
+    font-weight:600;
+    letter-spacing:-.01em;
+    line-height:1.15;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  ::selection{background:var(--accent-soft);color:var(--text);}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .tc{
+    font-variant-numeric:tabular-nums;
+    font-feature-settings:"tnum";
+    letter-spacing:.04em;
+    color:var(--accent);
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    border-bottom:1px solid transparent;
+    transition:background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+  }
+  header.site-nav.scrolled{
+    background:rgba(11,13,14,.78);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom-color:var(--border-soft);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-mark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Outfit',sans-serif;
+    font-weight:600;
+    font-size:16px;
+  }
+  .nav-mark .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+    flex-shrink:0;
+  }
+  nav.nav-links{
+    display:flex;
+    gap:36px;
+  }
+  nav.nav-links a{
+    font-size:14.5px;
+    color:var(--text-dim);
+    position:relative;
+    padding:4px 0;
+    transition:color .2s ease;
+  }
+  nav.nav-links a:hover{color:var(--text);}
+  nav.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:0;
+    width:0%;height:1px;
+    background:var(--accent);
+    transition:width .25s ease;
+  }
+  nav.nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:var(--bg);
+    background:var(--accent);
+    padding:9px 16px;
+    border-radius:var(--radius-s);
+    font-weight:600;
+    transition:filter .2s ease, transform .2s ease;
+  }
+  .nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:172px 0 108px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin-bottom:22px;
+  }
+  .hero-eyebrow .rec{
+    width:7px;height:7px;border-radius:50%;
+    background:#ff5b5b;
+    box-shadow:0 0 0 3px rgba(255,91,91,.15);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.35;}
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 3.6rem);
+    color:var(--text);
+    margin-bottom:8px;
+  }
+  .hero h1 span{color:var(--text-dim);font-weight:400;}
+  .hero .role{
+    font-size:18px;
+    color:var(--accent);
+    font-weight:500;
+    margin-bottom:22px;
+  }
+  .hero p.lede{
+    font-size:17.5px;
+    color:var(--text-dim);
+    max-width:52ch;
+    margin-bottom:36px;
+  }
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 22px;
+    border-radius:var(--radius-s);
+    font-size:15px;
+    font-weight:600;
+    font-family:'Outfit',sans-serif;
+    transition:transform .2s ease, filter .2s ease, background-color .2s ease, border-color .2s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#06110e;
+  }
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.07);}
+  .btn-ghost{
+    background:transparent;
+    border-color:var(--border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{border-color:var(--accent-line);background:var(--accent-soft);transform:translateY(-2px);}
+  .btn svg{width:16px;height:16px;flex-shrink:0;}
+
+  /* hero visual: stacked frames + playhead */
+  .hero-visual{
+    position:relative;
+    height:420px;
+  }
+  .frame{
+    position:absolute;
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:var(--radius-m);
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.6);
+  }
+  .frame-wide{
+    width:78%;
+    aspect-ratio:16/9;
+    top:8%;
+    left:0;
+  }
+  .frame-tall{
+    width:32%;
+    aspect-ratio:9/16;
+    bottom:0;
+    right:2%;
+    z-index:2;
+  }
+  .frame-inner{
+    position:absolute;inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-faint);
+  }
+  .frame-inner svg{width:34px;height:34px;opacity:.55;}
+  .frame-label{
+    position:absolute;
+    bottom:10px;left:12px;
+    font-size:11px;
+    color:var(--text-faint);
+    font-family:'Outfit',sans-serif;
+  }
+  .playhead-track{
+    position:absolute;
+    left:0; top:8%;
+    width:78%;
+    height:3px;
+    background:var(--border);
+    transform:translateY(-9px);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .playhead-fill{
+    height:100%;
+    width:0%;
+    background:var(--accent);
+    animation:scrub 3.6s cubic-bezier(.65,0,.35,1) 1 both;
+    animation-delay:.4s;
+  }
+  @keyframes scrub{
+    0%{width:0%;}
+    85%{width:100%;}
+    100%{width:100%;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    padding:112px 0;
+    border-top:1px solid var(--border-soft);
+  }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-head .tc-mark{
+    font-size:13px;
+    display:block;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+  }
+  .section-head p{
+    color:var(--text-dim);
+    max-width:44ch;
+    font-size:15.5px;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:64px;
+  }
+  .about-grid p{
+    color:var(--text-dim);
+    font-size:16.5px;
+    margin-bottom:18px;
+    max-width:60ch;
+  }
+  .about-grid p strong{color:var(--text);font-weight:600;}
+  .skills-block h3{
+    font-size:13px;
+    color:var(--text-faint);
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:34px;
+  }
+  .tag{
+    font-size:13.5px;
+    padding:8px 14px;
+    border:1px solid var(--border);
+    border-radius:var(--radius-s);
+    color:var(--text-dim);
+    background:var(--bg-raised);
+  }
+  .tag.on{
+    color:var(--accent);
+    border-color:var(--accent-line);
+    background:var(--accent-soft);
+  }
+
+  /* ---------- PROJECTS / FORMATS ---------- */
+  .formats-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:minmax(120px,auto);
+    gap:20px;
+  }
+  .fmt-card{
+    grid-column:span 6;
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:var(--radius-m);
+    padding:26px;
+    position:relative;
+    overflow:hidden;
+    transition:border-color .25s ease, transform .25s ease, background-color .25s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .fmt-card:hover{
+    border-color:var(--accent-line);
+    background:var(--bg-raised-2);
+    transform:translateY(-3px);
+  }
+  .fmt-card.w-wide{grid-column:span 4;}
+  .fmt-card.w-med{grid-column:span 3;}
+  .fmt-card.w-tall{grid-column:span 2;grid-row:span 2;}
+
+  .fmt-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .fmt-ratio{
+    font-size:12px;
+    color:var(--text-faint);
+    border:1px solid var(--border);
+    padding:4px 9px;
+    border-radius:20px;
+    font-family:'Outfit',sans-serif;
+  }
+  .fmt-frame{
+    border:1px solid var(--border);
+    border-radius:4px;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-faint);
+    margin-bottom:18px;
+  }
+  .fmt-frame svg{width:26px;height:26px;opacity:.5;}
+  .w-wide .fmt-frame{aspect-ratio:16/9;width:100%;}
+  .w-med .fmt-frame{aspect-ratio:16/9;width:100%;}
+  .w-tall .fmt-frame{aspect-ratio:9/16;width:62%;margin-left:auto;margin-right:auto;}
+
+  .fmt-card h3{
+    font-size:19px;
+    margin-bottom:8px;
+  }
+  .fmt-card p{
+    color:var(--text-dim);
+    font-size:14.5px;
+    margin-bottom:16px;
+    flex-grow:1;
+  }
+  .fmt-goals{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:auto;
+  }
+  .fmt-goals span{
+    font-size:11.5px;
+    color:var(--text-faint);
+    border:1px solid var(--border-soft);
+    padding:4px 9px;
+    border-radius:20px;
+  }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    padding-left:0;
+  }
+  .tl-item{
+    display:grid;
+    grid-template-columns:84px 1fr;
+    gap:28px;
+    padding-bottom:44px;
+    position:relative;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:37px;
+    top:22px;
+    bottom:-8px;
+    width:1px;
+    background:var(--border);
+  }
+  .tl-item:last-child::before{display:none;}
+  .tl-code{
+    font-size:13px;
+    padding-top:3px;
+  }
+  .tl-dot-wrap{
+    position:relative;
+  }
+  .tl-body{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:var(--radius-m);
+    padding:22px 26px;
+    transition:border-color .25s ease;
+  }
+  .tl-item:hover .tl-body{border-color:var(--accent-line);}
+  .tl-body .role-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .tl-body h3{font-size:17.5px;}
+  .tl-body .period{
+    font-size:13px;
+    color:var(--text-faint);
+    white-space:nowrap;
+  }
+  .tl-body .org{
+    font-size:14px;
+    color:var(--accent);
+    margin-bottom:10px;
+    font-weight:500;
+  }
+  .tl-body p{
+    color:var(--text-dim);
+    font-size:15px;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--border-soft);
+    padding:96px 0 40px;
+  }
+  .contact-inner{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:56px;
+    margin-bottom:72px;
+  }
+  footer h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
+    margin-bottom:18px;
+  }
+  footer .contact-copy{
+    color:var(--text-dim);
+    font-size:16.5px;
+    max-width:46ch;
+    margin-bottom:30px;
+  }
+  .contact-channels{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    border-top:1px solid var(--border-soft);
+  }
+  .channel{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 4px;
+    border-bottom:1px solid var(--border-soft);
+    transition:padding-left .2s ease, color .2s ease;
+  }
+  .channel:hover{padding-left:8px;color:var(--accent);}
+  .channel .ch-label{
+    font-size:13px;
+    color:var(--text-faint);
+    font-family:'Outfit',sans-serif;
+  }
+  .channel .ch-value{
+    font-size:15.5px;
+    font-weight:500;
+  }
+  .channel svg{width:16px;height:16px;opacity:.6;flex-shrink:0;}
+  .channel-row{display:flex;align-items:center;gap:14px;}
+
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    padding-top:28px;
+    border-top:1px solid var(--border-soft);
+    font-size:13px;
+    color:var(--text-faint);
+  }
+  .footer-mark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Outfit',sans-serif;
+    color:var(--text-dim);
+  }
+  .footer-mark .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-visual{height:320px;margin-top:20px;}
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .contact-inner{grid-template-columns:1fr;gap:40px;}
+    .formats-grid{grid-template-columns:repeat(2,1fr);}
+    .fmt-card, .fmt-card.w-wide, .fmt-card.w-med, .fmt-card.w-tall{grid-column:span 2;grid-row:auto;}
+  }
+
+  @media (max-width:720px){
+    .wrap{padding:0 20px;}
+    nav.nav-links{display:none;}
+    .hero{padding:140px 0 72px;}
+    section{padding:76px 0;}
+    .formats-grid{grid-template-columns:1fr;}
+    .fmt-card, .fmt-card.w-wide, .fmt-card.w-med, .fmt-card.w-tall{grid-column:1;}
+    .tl-item{grid-template-columns:56px 1fr;gap:16px;}
+    .tl-item::before{left:25px;}
+    .nav-cta{padding:8px 12px;font-size:13px;}
+    footer{padding:64px 0 28px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark"><span class="dot"></span>Thaian Landim</a>
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="nav-cta" href="https://api.whatsapp.com/send/?phone=5512992256900&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;padding-top:172px;">
+    <div class="wrap">
+      <div>
+        <div class="hero-eyebrow"><span class="rec"></span>Disponível para novos projetos</div>
+        <h1>Thaian Landim <span>— Videomaker</span></h1>
+        <div class="role">Jornalista, Editor de Vídeo & Videomaker</div>
+        <p class="lede">Transformo roteiro e matéria-prima em vídeo que retém, convence e vende — de VSLs e criativos de anúncio a conteúdo de YouTube e Reels para marcas, criadores e infoprodutores.</p>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+            Ver portfólio
+          </a>
+          <a href="https://www.linkedin.com/in/thaian-landim-a738361b8/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5.98 5.98 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/thaianlandim_videomaker/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="playhead-track"><div class="playhead-fill"></div></div>
+        <div class="frame frame-wide">
+          <div class="frame-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <span class="frame-label">16:9 — YouTube / Institucional</span>
+        </div>
+        <div class="frame frame-tall">
+          <div class="frame-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <span class="frame-label">9:16 — Reels</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="tc tc-mark">00:01 — Sobre</span>
+          <h2>Quem edita a sua história</h2>
+        </div>
+        <p>Formação em jornalismo aplicada à produção de vídeo — do roteiro ao corte final.</p>
+      </div>
+
+      <div class="about-grid reveal">
+        <div>
+          <p>Sou <strong>formado em Jornalismo</strong> pela Universidade de Taubaté e atuo no mercado de comunicação desde <strong>2019</strong>. Passei por comunicação institucional, produção de TV e reportagem antes de me especializar, há três anos, em conteúdo digital, lançamentos e VSLs.</p>
+          <p>Hoje trabalho como videomaker freelancer, criando vídeos para YouTube e Instagram com foco em resultado: cada projeto é ajustado ao nicho, ao objetivo e ao público de quem contrata — empresas, criadores de conteúdo e infoprodutores.</p>
+          <p>Já colaborei com estúdios de produção como a <strong>4Hands Company</strong> em projetos institucionais e integrei a cobertura audiovisual do <strong>Fórum E-Commerce Brasil</strong> ao lado do time da <strong>Kipiai</strong>.</p>
+        </div>
+
+        <div class="skills-block">
+          <h3>Etapas do processo</h3>
+          <div class="tags">
+            <span class="tag on">Captação</span>
+            <span class="tag on">Edição de vídeo</span>
+            <span class="tag on">Pós-produção</span>
+          </div>
+          <h3>Formatos de entrega</h3>
+          <div class="tags">
+            <span class="tag">VSL</span>
+            <span class="tag">Criativos / Ads</span>
+            <span class="tag">Reels & Vertical</span>
+            <span class="tag">Institucional</span>
+            <span class="tag">YouTube</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS / FORMATOS -->
+  <section id="projetos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="tc tc-mark">00:02 — Projetos</span>
+          <h2>Um formato para cada objetivo</h2>
+        </div>
+        <p>Vídeos editados do meu portfólio entram aqui — substitua os quadros abaixo pelos players ou embeds finais.</p>
+      </div>
+
+      <div class="formats-grid reveal">
+
+        <article class="fmt-card w-wide">
+          <div class="fmt-top">
+            <h3 style="margin:0;">VSL — Vídeo de Vendas</h3>
+            <span class="fmt-ratio">16:9</span>
+          </div>
+          <div class="fmt-frame">
+            <!-- espaço reservado para vídeo editado: substituir por <video> ou <iframe> -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p>Roteiro, ritmo de corte e prova social organizados para conduzir o espectador até a decisão de compra — o formato mais usado em lançamentos e páginas de venda.</p>
+          <div class="fmt-goals"><span>Vendas</span><span>Lançamentos</span></div>
+        </article>
+
+        <article class="fmt-card w-med">
+          <div class="fmt-top">
+            <h3 style="margin:0;">Criativos para Anúncios</h3>
+            <span class="fmt-ratio">1:1 / 16:9</span>
+          </div>
+          <div class="fmt-frame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p>Peças curtas e testáveis para tráfego pago, pensadas para prender atenção nos primeiros segundos e reduzir custo de aquisição.</p>
+          <div class="fmt-goals"><span>Vendas</span><span>Marca</span></div>
+        </article>
+
+        <article class="fmt-card w-tall">
+          <div class="fmt-top">
+            <h3 style="margin:0;">Reels & Vertical</h3>
+            <span class="fmt-ratio">9:16</span>
+          </div>
+          <div class="fmt-frame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p>Cortes verticais para Instagram e outras redes, com legendas e ritmo pensados para reter no feed e reforçar presença recorrente.</p>
+          <div class="fmt-goals"><span>Autoridade</span><span>Marca</span></div>
+        </article>
+
+        <article class="fmt-card w-med">
+          <div class="fmt-top">
+            <h3 style="margin:0;">Vídeo Institucional</h3>
+            <span class="fmt-ratio">16:9</span>
+          </div>
+          <div class="fmt-frame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p>Vídeos de apresentação para empresas e marcas, com narrativa e imagem alinhadas ao posicionamento institucional do cliente.</p>
+          <div class="fmt-goals"><span>Marca</span><span>Autoridade</span></div>
+        </article>
+
+        <article class="fmt-card w-wide">
+          <div class="fmt-top">
+            <h3 style="margin:0;">YouTube — Vídeos Longos</h3>
+            <span class="fmt-ratio">16:9</span>
+          </div>
+          <div class="fmt-frame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <p>Edição de vídeos longos com ritmo, cortes e recursos visuais que sustentam retenção e constroem autoridade de canal ao longo do tempo.</p>
+          <div class="fmt-goals"><span>Autoridade</span><span>Lançamentos</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="tc tc-mark">00:03 — Experiência</span>
+          <h2>Linha do tempo profissional</h2>
+        </div>
+        <p>Da reportagem à edição de vídeo para conteúdo digital.</p>
+      </div>
+
+      <div class="timeline reveal">
+
+        <div class="tl-item">
+          <div class="tl-dot-wrap"><span class="tc tl-code">2019</span></div>
+          <div class="tl-body">
+            <div class="role-row">
+              <h3>Videomaker & Editor de Vídeo</h3>
+              <span class="period">2019 — atual</span>
+            </div>
+            <div class="org">Freelancer · Taubaté, SP</div>
+            <p>Produção e edição de vídeos para YouTube e Instagram, com foco em VSLs, criativos para anúncios e conteúdo de lançamento para infoprodutores e criadores.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot-wrap"><span class="tc tl-code">2022</span></div>
+          <div class="tl-body">
+            <div class="role-row">
+              <h3>Cobertura audiovisual — Fórum E-Commerce Brasil</h3>
+              <span class="period">Projeto</span>
+            </div>
+            <div class="org">Em parceria com Kipiai</div>
+            <p>Produção de conteúdo em vídeo durante o evento, ao lado de especialistas de SEO e mídia, registrando bastidores e conteúdo para redes sociais.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot-wrap"><span class="tc tl-code">2023</span></div>
+          <div class="tl-body">
+            <div class="role-row">
+              <h3>Vídeo institucional — Brava Construtora</h3>
+              <span class="period">Projeto</span>
+            </div>
+            <div class="org">Em parceria com 4Hands Company</div>
+            <p>Edição de vídeo institucional desenvolvido em parceria com a produtora 4Hands Company para a Brava Construtora.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot-wrap"><span class="tc tl-code">2015</span></div>
+          <div class="tl-body">
+            <div class="role-row">
+              <h3>Comunicação institucional, TV e reportagem</h3>
+              <span class="period">Início de carreira</span>
+            </div>
+            <div class="org">Jornalismo</div>
+            <p>Passagens por comunicação institucional, produção de TV e reportagem, base que hoje orienta a forma como estrutura roteiro e narrativa em vídeo.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot-wrap"><span class="tc tl-code">—</span></div>
+          <div class="tl-body">
+            <div class="role-row">
+              <h3>Jornalismo</h3>
+              <span class="period">Formação</span>
+            </div>
+            <div class="org">Universidade de Taubaté</div>
+            <p>Graduação em Jornalismo, base para a construção de roteiro, apuração de conteúdo e narrativa aplicada à edição de vídeo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CONTATO / FOOTER -->
+<footer id="contato">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <div>
+        <span class="tc tc-mark">00:04 — Contato</span>
+        <h2>Vamos editar o seu próximo vídeo</h2>
+        <p class="contact-copy">Tem um roteiro, uma gravação ou uma ideia de lançamento? Me chama e vamos conversar sobre formato, prazo e objetivo do projeto.</p>
+        <a href="https://api.whatsapp.com/send/?phone=5512992256900&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+
+      <div class="contact-channels">
+        <a class="channel" href="mailto:contato@thaianlandim.com.br">
+          <div class="channel-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            <span class="ch-label">E-mail</span>
+          </div>
+          <span class="ch-value">contato@thaianlandim.com.br</span>
+        </a>
+        <a class="channel" href="https://www.linkedin.com/in/thaian-landim-a738361b8/" target="_blank" rel="noopener">
+          <div class="channel-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5.98 5.98 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span class="ch-label">LinkedIn</span>
+          </div>
+          <span class="ch-value">/thaian-landim</span>
+        </a>
+        <a class="channel" href="https://www.instagram.com/thaianlandim_videomaker/" target="_blank" rel="noopener">
+          <div class="channel-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            <span class="ch-label">Instagram</span>
+          </div>
+          <span class="ch-value">@thaianlandim_videomaker</span>
+        </a>
+        <a class="channel" href="https://api.whatsapp.com/send/?phone=5512992256900&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">
+          <div class="channel-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span class="ch-label">WhatsApp</span>
+          </div>
+          <span class="ch-value">(12) 99225-6900</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-mark"><span class="dot"></span>Thaian Landim — Editor de Vídeo</div>
+      <div>© 2026 Thaian Landim. CNPJ 54.742.679/0001-13. Todos os direitos reservados.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar: blur/transparência ao rolar
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > 12) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Fade-in ao scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
